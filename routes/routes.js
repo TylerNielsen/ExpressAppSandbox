@@ -16,7 +16,7 @@ router.get('/documents', (req, res, next) => {
 });
 
 router.get('/document', (req, res, next) => {
-    req.app.locals.db.collection('documents').findOne({
+     req.app.locals.db.collection('documents').findOne({
         '_id': req.params.id
     }, (err, result) => {
         if(err){
@@ -29,10 +29,11 @@ router.get('/document', (req, res, next) => {
 })
 
 router.post('/document', (req, res, next) => {
-    const newDocument = new Document(req.body.title, req.boxy.username, req.body.body);
-    req.app.locals.db.collection('documents').insertOne({
-        newDocument
-    }, (err, result) => {
+    var newDocument = new Document({
+       ...req.body
+    });
+    console.log(newDocument);
+    newDocument.save((err, result) => {
         if (err){
             res.status(400).send({'error': err});
         }
