@@ -15,7 +15,7 @@ router.get('/documents', (req, res, next) => {
     })
 });
 
-router.get('/document', (req, res, next) => {
+router.get('/documents', (req, res, next) => {
      req.app.locals.db.collection('documents').findOne({
         '_id': req.params.id
     }, (err, result) => {
@@ -28,7 +28,7 @@ router.get('/document', (req, res, next) => {
     });
 })
 
-router.post('/document', (req, res, next) => {
+router.post('/documents', (req, res, next) => {
     var newDocument = new Document({
        ...req.body
     });
@@ -41,7 +41,7 @@ router.post('/document', (req, res, next) => {
     });
 });
 
-router.delete('/document/:id', (req, res, next) =>{
+router.delete('/documents/:id', (req, res, next) =>{
     req.app.locals.db.collection('documents').deleteOne({
         '_id': req.params.id
     }, (err, result) => {
@@ -52,7 +52,7 @@ router.delete('/document/:id', (req, res, next) =>{
     })
 });
 
-router.patch('/document/:id', (req, res, next) => {
+router.patch('/documents/:id', (req, res, next) => {
     req.app.locals.db.collection('documents').updateOne({
       '_id': req.params.id
     }, 

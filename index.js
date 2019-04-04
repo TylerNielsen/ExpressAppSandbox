@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const dbName = process.env.NODE_ENV === 'dev' ? 'database-test' : 'database';
-const url = `mongodb://localhost:27017/${dbName}`;
+const dbName = process.env.NODE_ENV === 'dev' ? 'database-test' : 'database-prod';
+const url = `mongodb://database:27017/${dbName}`;
 const options = {
   useNewUrlParser: true, 
   reconnectTries: 60, 

@@ -10,8 +10,8 @@ services:
     env_file:
       - ../.env
     environment:
-      WAIT_HOSTS: database-test:27017
-  database-test:
+      WAIT_HOSTS: database:27017
+  database:
     image: mongo:4.0
     env_file:
       - ../.env
@@ -20,5 +20,3 @@ services:
     expose:
       - 27017
     command: "mongod --smallfiles --logpath=${MONGO_LOG_FILE}"
-view raw
-docker-compose.test.yml hosted with ❤ by GitHub
