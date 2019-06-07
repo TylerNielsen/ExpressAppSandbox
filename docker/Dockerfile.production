@@ -8,4 +8,5 @@ RUN npm install --only=production
 ARG port=80
 EXPOSE $port
 COPY . ./
-CMD /wait && node index.js
+CMD babel src -d lib --extensions ".ts,.js"
+CMD /wait && node ./lib/index.js
