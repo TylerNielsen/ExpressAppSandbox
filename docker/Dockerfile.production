@@ -4,9 +4,9 @@ RUN chmod +x /wait
 WORKDIR /home/nodejs/app
 ENV NODE_ENV prod
 COPY package*.json ./
-RUN npm install --only=production
+RUN npm install
 ARG port=80
 EXPOSE $port
 COPY . ./
-CMD babel src -d lib --extensions ".ts,.js"
-CMD /wait && node ./lib/index.js
+CMD npm run compile
+CMD /wait && node ./dist/index.js
