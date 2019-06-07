@@ -8,5 +8,5 @@ RUN npm install
 ARG port=80
 EXPOSE $port
 COPY . ./
-CMD npm run compile
+RUN npm run compile
 CMD /wait && node ./dist/index.js
