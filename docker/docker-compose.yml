@@ -9,7 +9,6 @@ services:
         port: ${PORT}
     env_file:
       - ../.env
-   
     ports:
       - "${PORT}:${PORT}"
     environment:
@@ -22,6 +21,8 @@ services:
       - ../.env
     expose:
       - 27017
+    volumes:
+      - ${LOCAL_DATA_DIR}:${MONGO_DATA_DIR}
     command: "mongod --smallfiles --logpath=${MONGO_LOG_FILE}"
     networks:
       - backend
@@ -29,3 +30,4 @@ services:
 networks:
   backend:
 
+    
