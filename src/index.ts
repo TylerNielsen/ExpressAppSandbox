@@ -10,6 +10,18 @@ const options = {
   reconnectInterval: 1000
 };
 
+console.log("Attempting to connect to DB");
+mongoose.connect(url, options, (err) => {
+  console.error.bind(console, "connection error:");
+  if (err) { console.log(err); }
+});
+
+const db = mongoose.connection;
+
+db.once("open", () => {
+  console.log("DB is open!");
+});
+
 import routes from "./routes/routes.js";
 const port = process.env.PORT || 8090;
 const app = express();
@@ -21,17 +33,6 @@ app.use((req, res) => {
   res.status(404).send({error: "No resource found"});
 });
 
-console.log("Attempting to connect to DB");
-mongoose.connect(url, options, (err) => {
-  console.error.bind(console, "connection error:");
-});
-
-const db = mongoose.connection;
-
-db.once("open", () => {
-  console.log("DB is open!");
-});
-
 app.locals.db = db;
 
 app.listen(port, () => {
@@ -39,4 +40,4 @@ app.listen(port, () => {
   app.emit("APP_STARTED");
 });
 
-module.exports = app;
+export default app ;

@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  backend:
+  api:
     build: 
       context: ../
       dockerfile: docker/Dockerfile 
@@ -11,10 +11,8 @@ services:
       - ../.env
     ports:
       - "${PORT}:${PORT}"
-    environment:
-      WAIT_HOSTS: database:27017
-    networks:
-      - backend
+    depends_on: 
+      - database
   database:
     image: mongo:4.0
     env_file:
@@ -24,10 +22,7 @@ services:
     volumes:
       - ${LOCAL_DATA_DIR}:${MONGO_DATA_DIR}
     command: "mongod --smallfiles --logpath=${MONGO_LOG_FILE}"
-    networks:
-      - backend
-      
-networks:
-  backend:
+  
+
 
     
