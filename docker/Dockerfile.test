@@ -1,4 +1,4 @@
-FROM docker_backend
+FROM docker_api
 ENV NODE_ENV dev
 RUN npm install && npm install -g mocha
 ARG port=80
